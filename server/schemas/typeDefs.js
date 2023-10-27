@@ -32,7 +32,7 @@ const typeDefs = `
 
     type Query {
         me: User
-        user: [User]
+        users: [User]
     }
 
     type Mutation {
@@ -42,3 +42,5 @@ const typeDefs = `
         removeBook(bookId: String!): User
     }
 `;
+
+module.exports = typeDefs;
