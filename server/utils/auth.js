@@ -11,23 +11,26 @@ module.exports = {
     },
   }),
   authMiddleware: function ({ req }) {
+    console.log("Request Headers:", req.headers);
     let token = req.body.token || req.query.token || req.headers.authorization;
-
+    console.log("Token" + token);
     if (req.headers.authorization) {
       token = token.split(" ").pop().trim();
     }
 
     if (!token) {
+      console.log("Token is not provided.");
       return req;
     }
 
     try {
+      console.log("Token being verified:", token);
       const { authenticatedPerson } = jwt.verify(token, secret, {
         maxAge: expiration,
       });
       req.user = authenticatedPerson;
-    } catch {
-      console.log("Invalid token");
+    } catch (err) {
+      console.log("Token verification error:", err.message);
     }
 
     return req;

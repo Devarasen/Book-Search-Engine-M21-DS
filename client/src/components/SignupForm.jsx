@@ -40,8 +40,8 @@ const SignupForm = () => {
 
       console.log("Mutation Response:", data);
 
-      const { token, user } = data;
-      console.log(user);
+      const { token, user } = data.addUser;
+      console.log(data);
       Auth.login(token);
     } catch (err) {
       console.error(err);
