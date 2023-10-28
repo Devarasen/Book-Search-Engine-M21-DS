@@ -45,7 +45,8 @@ const resolvers = {
       if (context.user) {
         return User.findByIdAndUpdate(
           { _id: context.user._id },
-          { $addToSet: { savedBooks: book } }
+          { $addToSet: { savedBooks: book } },
+          { new: true, runValidators: true }
         );
       }
       throw new AuthenticationError("You need to be logged in!");
@@ -55,7 +56,8 @@ const resolvers = {
       if (context.user) {
         return User.findByIdAndUpdate(
           { _id: context.user._id },
-          { $pull: { savedBooks: { bookId } } }
+          { $pull: { savedBooks: { bookId } } },
+          { new: true, runValidators: true }
         );
       }
     },
